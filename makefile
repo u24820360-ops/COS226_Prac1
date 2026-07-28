@@ -40,6 +40,6 @@ PetersonLockExperiment: PetersonLockExperiment.class
 
 
 clean:
-	-@del /Q *.class 2>NUL || $(RM) *.class 2>/dev/null; true
+	-@$(RM) -f *.class 2>/dev/null; true
 
 .PHONY: all run-one run-two run-peterson run-all clean
