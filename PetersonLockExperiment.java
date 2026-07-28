@@ -61,6 +61,7 @@ public class PetersonLockExperiment{
             }
         });
 
+        //Thread 2 with no lock
         Thread t2 = new Thread(new Runnable(){
             @Override 
             public void run(){
@@ -70,6 +71,7 @@ public class PetersonLockExperiment{
             }
         });
 
+        //Thread 3 with no lock
         Thread t3 = new Thread(new Runnable(){
             @Override 
             public void run(){
