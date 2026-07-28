@@ -1,5 +1,5 @@
 public class LockOneExperiment {
-    private static LockOne ultimateLock = new LockOne();
+    private static LockOne ultimateLock = new LockOne(); // lock instance
 
     static class LockOne implements Lock {
         @Override
