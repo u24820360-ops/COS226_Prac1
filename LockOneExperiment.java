@@ -1,5 +1,4 @@
 public class LockOneExperiment {
-    // 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
     private static LockOne ultimateLock = new LockOne();
 
     static class LockOne implements Lock {
