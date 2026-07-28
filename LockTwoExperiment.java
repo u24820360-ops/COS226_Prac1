@@ -1,22 +1,19 @@
 public class LockTwoExperiment {
 
     public static class LockTwo implements Lock {
-        private volatile long victim;
+        private volatile int victim;
 
         @Override
-        public void lock() {
-            if (Thread.currentThread().getName().endsWith("0")) {
-                victim = Thread.currentThread().getId();
-            } else {
-                victim = Thread.currentThread().getId();
-            }
+        public void lock() { //The overridden lock function determines which Thread will raise its hand to be the victim.
+            int id = Thread.currentThread().getName().endsWith("0") ? 0 : 1;
 
-            while (victim == Thread.currentThread().getId()) {
-            }
+            victim = id;
+
+            while (victim == id) {}
         }
 
         @Override
-        public void unlock() {}
+        public void unlock() {} //No implementation needed for unlock since the other Thread will take the victim status away from the current thread.
     }
 
     public static class SharedCounter {
@@ -27,7 +24,7 @@ public class LockTwoExperiment {
             this.myLock = locktwo;
         }
 
-        public void increment() {
+        public void increment() { //The lock is acquired allowing the Thread to get into the critical section.
             myLock.lock();
             try {
                 count = count + 1;
@@ -47,25 +44,22 @@ public class LockTwoExperiment {
 
         @Override
         public void run() {
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 50; i++) { //The task is created such that the counter is run 50 times for each Thread.
                 savedCounter.increment();
-                try {
-                    Thread.sleep(500);
-                } catch (Exception e) {
-                    System.out.println("Thread Interrupted");
-                }
-                System.out.println("Task is running in: " + Thread.currentThread().getId());
+                //System.out.println("Task is running in: " + Thread.currentThread().getId());
             }
         }
     }
 
     public static void main(String[] args) {
-        LockTwo lt = new LockTwo();
-        SharedCounter sc = new SharedCounter(lt);
-        CounterTask ct = new CounterTask(sc);
-        Thread thrOne = new Thread(ct, "Thread-0");
+        LockTwo lt = new LockTwo();                         //Create a LockTwo instance which will hold the lock and unlock functions.
+        SharedCounter sc = new SharedCounter(lt);           //Create a SharedCounter instance which holds the count logic with locking involved.
+        CounterTask ct = new CounterTask(sc);               //Create a CounterTask instance which overrides the run function that each Thread will run.
+        Thread thrOne = new Thread(ct, "Thread-0");   //Create two threads that will run the counter task concurrently.
         Thread thrTwo = new Thread(ct, "Thread-1");
         thrOne.start();
         thrTwo.start();
     }
 }
+
+//Locktwo fails because both threads can become victims.
