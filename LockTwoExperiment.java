@@ -46,7 +46,7 @@ public class LockTwoExperiment {
         public void run() {
             for (int i = 0; i < 50; i++) { //The task is created such that the counter is run 50 times for each Thread.
                 savedCounter.increment();
-                //System.out.println("Task is running in: " + Thread.currentThread().getId());
+                System.out.println("Task is running in: " + Thread.currentThread().getId());
             }
         }
     }
