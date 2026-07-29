@@ -1,4 +1,4 @@
-# COS226 Practical 1 — Lock Algorithms
+# COS226 Practical 1
 
 ## Prerequisites
 
@@ -11,7 +11,14 @@ make --version
 
 ## Setup
 
-Clone the repo and enter the directory:
+### Option 1 — From the zip file
+
+```bash
+unzip Prac1.zip -d COS226_Prac1
+cd COS226_Prac1
+```
+
+### Option 2 — From the repository
 
 ```bash
 git clone https://github.com/u24820360-ops/COS226_Prac1.git
