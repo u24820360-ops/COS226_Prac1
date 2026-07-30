@@ -6,7 +6,7 @@ public class LockOneExperiment {
         public void lock() {
             // lock resource so that only one thread accesses the critical section
             // threads indicate interest by setting flag[thread id] to true
-            int i = (int) (Thread.currentThread().getId() % 2);
+            int i = (int) (Thread.currentThread().threadId() % 2);
             int j = 1 - i;
 
             this.flag[i] = true;
@@ -23,7 +23,7 @@ public class LockOneExperiment {
 
         @Override
         public void unlock() {
-            int i = (int) (Thread.currentThread().getId() % 2);
+            int i = (int) (Thread.currentThread().threadId() % 2);
             this.flag[i] = false;
         }
 
